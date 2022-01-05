@@ -40,19 +40,22 @@ This file must be uploaded last to indicate that the _Import Job_ should begin t
 
 ## CSV file specifications
 
-There are 14 recognised CSV files:
-[_uuidRemappings.csv_](#uuidremappingscsv), [_properties.csv_](#propertiescsv), [_groups.csv_](#groupscsv), [_units.csv_](#unitscsv), [_userRelations.csv_](#userrelationscsv)
+There are 14 recognised CSV files:  
+[_uuidRemappings.csv_](#uuidremappingscsv), [_properties.csv_](#propertiescsv), [_groups.csv_](#groupscsv), [_units.csv_](#unitscsv), [_userRelations.csv_](#userrelationscsv),  
 [_utilisationPeriods.csv_](#utilisationperiodscsv), [_tenantCheckIns.csv_](#tenantcheckinscsv), [_tenants.csv_](#tenantscsv),
-[_propertyTeams.csv_](#propertyteamscsv), [_agents.csv_](#agentscsv), [_agentPermissions.csv_](#agentPermissionscsv), [_serviceProviders.csv_](#serviceProviderscsv), [_collections.csv_](#collectionscsv), [_collectionAssignments.csv_](#collectionAssignmentscsv).
-It is not required that each CSV be included in each Import Job.
-For example, it is possible to include only the `agents.csv` file, or any other combination.
-However, when inserting new data, the necessary data to resolve the foreign ID relationships _must_ also be included.
-Issues in resolving data relationships will result in an error, terminating the complete Import Job.
+[_propertyTeams.csv_](#propertyteamscsv), [_agents.csv_](#agentscsv), [_agentPermissions.csv_](#agentPermissionscsv), [_serviceProviders.csv_](#serviceProviderscsv), [_collections.csv_](#collectionscsv), [_collectionAssignments.csv_](#collectionAssignmentscsv).  
+  
+It is not required that each CSV is included in each Import Job.  
 
-#### Global Observations:
+For example, it is possible to include only the `agents.csv` file, or any other combination.  
+However, when inserting new data, the necessary data to resolve the foreign ID relationships _must_ also be included.   
+
+Issues in parsing or resolving data relationships will result in an error, terminating the complete Import Job.  
+
+#### Global Rules:
 
 - Columns can be in any order
-- First row in CSV file must contain column field name
+- First row in the CSV file must contain column field names
 - Column field names are case-sensitive
 - Unless noted otherwise, all fields are required when _importType_ is `insert`
 - Only UUID type fields required when _importType_ is `update`
