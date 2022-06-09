@@ -108,7 +108,7 @@ insert,40456bad-f487-4a49-b94a-9d215ce32379,Achimalon Acres
 
 ### groups.csv
 
-The `groups.csv` file imports group data.
+The `groups.csv` file imports group data. Address related data is optional when it is an update.
 
 #### Fields
 
