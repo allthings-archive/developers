@@ -7,7 +7,7 @@
 We are using a predefined Color Palette throughout our Application. You can find 
 the corresponding github repo over [here](https://github.com/allthings/colors)
 
-![Allthings ColorPalette](https://rawgit.com/allthings/developers/design.guide/design-guide/visual-guide/assets/colors/colors.png)
+![Allthings ColorPalette](https://raw.githubusercontent.com/allthings/developers/master/design-guide/visual-guide/assets/colors/colors.png)
 
 
 ## Typography
@@ -48,4 +48,4 @@ All our colors are fine! But don’t overuse them. For dark Text you should use
 
 We either use the Logo with the name “Allthings” to the right, or just the Logo. 
 
-You can find the logo files right [here](assets/logos/)
+You can find the logo files [here](logos.md)

@@ -14,17 +14,17 @@ requires a minimal amount of effort to ensure compatibility.
 adapting to layouts from small smartphone screens to tablets and large desktop
 computers.
 * [HTTPS](https://en.wikipedia.org/wiki/HTTPS) connection for all resources.
-* Interface design must follow our Micro-App [design guide](design-guide/).
+* Interface design must follow our Micro-App [design guide](../design-guide/).
 
 ## With authorization
 
 A Micro-App that needs to connect to user data or other data on the Allthings
-platform has to be authorized via [OAuth 2.0](oauth.md) and can therefore access
+platform has to be authorized via [OAuth 2.0](../oauth.md) and can therefore access
 and modify resources on the Allthings platform on behalf of the user.
 
 ### Additional requirements
 
-* Implementation of [OAuth 2.0](oauth.md) authorization flow.
+* Implementation of [OAuth 2.0](../oauth.md) authorization flow.
 
 ## Cookies
 
@@ -59,25 +59,4 @@ Since MicroApps are displayed in an IFrame, the Allthings app domains need to be
 allowed:
 ```
 Content-Security-Policy: frame-ancestors *.allthings.me *.allthings.app;
-```
-
-#### Internet Explorer
-To prevent Clickjacking in Internet Explorer - which does not support the
-`frame-ancestors` policy - the
-[X-Frame-Options](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options)
-header must be used, which unfortunately only supports a single non-wildcard
-domain as framing exception.
-
-To still support multiple (wildcard-) domain exceptions, the current app domain
-can be appended to the iFrame URL, e.g.:
-```
-https://example.com/?frame-ancestor=https%3A%2F%2Fexample.allthings.app
-```
-
-The framed MicroApp (`example.com` in this example) can then compare the
-`frame-ancestor` parameter (the URL-encoded `https://example.allthings.app`)
-with a predefined whitelist and if valid, set the appropriate `X-Frame-Options`
-header:
-```
-X-Frame-Options: ALLOW-FROM https://example.allthings.app
 ```
