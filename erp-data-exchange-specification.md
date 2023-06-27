@@ -43,14 +43,14 @@ This file must be uploaded last to indicate that the _Import Job_ should begin t
 There are 14 recognised CSV files:  
 [_uuidRemappings.csv_](#uuidremappingscsv), [_properties.csv_](#propertiescsv), [_groups.csv_](#groupscsv), [_units.csv_](#unitscsv), [_userRelations.csv_](#userrelationscsv),  
 [_utilisationPeriods.csv_](#utilisationperiodscsv), [_tenantCheckIns.csv_](#tenantcheckinscsv), [_tenants.csv_](#tenantscsv),
-[_propertyTeams.csv_](#propertyteamscsv), [_agents.csv_](#agentscsv), [_agentPermissions.csv_](#agentPermissionscsv), [_serviceProviders.csv_](#serviceProviderscsv), [_collections.csv_](#collectionscsv), [_collectionAssignments.csv_](#collectionAssignmentscsv).  
-  
-It is not required that each CSV is included in each Import Job.  
+[_propertyTeams.csv_](#propertyteamscsv), [_agents.csv_](#agentscsv), [_agentPermissions.csv_](#agentPermissionscsv), [_serviceProviders.csv_](#serviceProviderscsv), [_collections.csv_](#collectionscsv), [_collectionAssignments.csv_](#collectionAssignmentscsv).
+
+It is not required that each CSV is included in each Import Job.
 
 For example, it is possible to include only the `agents.csv` file, or any other combination.  
-However, when inserting new data, the necessary data to resolve the foreign ID relationships _must_ also be included.   
+However, when inserting new data, the necessary data to resolve the foreign ID relationships _must_ also be included.
 
-Issues in parsing or resolving data relationships will result in an error, terminating the complete Import Job.  
+Issues in parsing or resolving data relationships will result in an error, terminating the complete Import Job.
 
 #### Global Rules:
 
@@ -59,6 +59,7 @@ Issues in parsing or resolving data relationships will result in an error, termi
 - Column field names are case-sensitive
 - Unless noted otherwise, all fields are required when _importType_ is `insert`
 - Only UUID type fields required when _importType_ is `update`
+- Fields prefixed with a star (ex. \*propertyOwner) denotes that the field is optional
 - Files must use the UTF-8 character encoding
 
 ### uuidRemappings.csv
@@ -90,12 +91,12 @@ The `properties.csv` file imports property resource data.
 
 #### Fields
 
-| Field             | Type                        | Description                         |
-| ----------------- | --------------------------- | ----------------------------------- |
-| **importType**    | [Import Type](#import-type) | One of:<br/>`insert`, `update`      |
-| **id**            | [UUID](#uuid-type)          | Your UUID for this property         |
-| **name**          | [string](#string-type)      | The property name                   |
-| **propertyOwner** | [string](#string-type)      | Optional name of the property owner |
+| Field               | Type                        | Description                    |
+| ------------------- | --------------------------- | ------------------------------ |
+| **importType**      | [Import Type](#import-type) | One of:<br/>`insert`, `update` |
+| **id**              | [UUID](#uuid-type)          | Your UUID for this property    |
+| **name**            | [string](#string-type)      | The property name              |
+| **\*propertyOwner** | [string](#string-type)      | Name of the property owner     |
 
 #### Example
 
@@ -112,18 +113,18 @@ The `groups.csv` file imports group data. Address related data is optional when 
 
 #### Fields
 
-| Field             | Type                            | Description                                                                    |
-| ----------------- | ------------------------------- | ------------------------------------------------------------------------------ |
-| **importType**    | [Import Type](#import-type)     | One of:<br/>`insert`, `update`                                                 |
-| **id**            | [UUID](#uuid-type)              | Your UUID for the group                                                        |
-| **propertyId**    | [UUID](#uuid-type)              | The foreign UUID of the property the group belongs to (_properties.csv_ `id`)  |
-| **name**          | [string](#string-type)          |
-| **country**       | [Country](#country-type)        |
-| **city**          | [string](#string-type)          |
-| **streetName**    | [string](#string-type)          | The name of the street the structure is located on, e.g. Kaiser-Joseph-Strasse |
-| **houseNumber**   | [string](#string-type)          | The number of the structure on the street, e.g. 123                            |
-| **zipCode**       | [Postal Code](#postalcode-type) |
-| **propertyOwner** | [string](#string-type)          | Optional name of the property owner                                            |
+| Field               | Type                            | Description                                                                    |
+| ------------------- | ------------------------------- | ------------------------------------------------------------------------------ |
+| **importType**      | [Import Type](#import-type)     | One of:<br/>`insert`, `update`                                                 |
+| **id**              | [UUID](#uuid-type)              | Your UUID for the group                                                        |
+| **propertyId**      | [UUID](#uuid-type)              | The foreign UUID of the property the group belongs to (_properties.csv_ `id`)  |
+| **name**            | [string](#string-type)          |
+| **country**         | [Country](#country-type)        |
+| **city**            | [string](#string-type)          |
+| **streetName**      | [string](#string-type)          | The name of the street the structure is located on, e.g. Kaiser-Joseph-Strasse |
+| **\*houseNumber**   | [string](#string-type)          | The number of the structure on the street, e.g. 123                            |
+| **zipCode**         | [Postal Code](#postalcode-type) |
+| **\*propertyOwner** | [string](#string-type)          | Name of the property owner                                                     |
 
 #### Example
 
@@ -140,13 +141,13 @@ The `units.csv` file imports unit data. It allows for associating groups with un
 
 #### Fields
 
-| Field             | Type                        | Description                                                           |
-| ----------------- | --------------------------- | --------------------------------------------------------------------- |
-| **importType**    | [Import Type](#import-type) | One of:<br/>`insert`, `update`                                        |
-| **id**            | [UUID](#uuid-type)          | Your UUID for the unit                                                |
-| **groupId**       | [UUID](#uuid-type)          | The foreign UUID of the group the unit belongs to (_groups.csv_ `id`) |
-| **name**          | [string](#string-type)      |
-| **propertyOwner** | [string](#string-type)      | Optional name of the property owner                                   |
+| Field               | Type                        | Description                                                           |
+| ------------------- | --------------------------- | --------------------------------------------------------------------- |
+| **importType**      | [Import Type](#import-type) | One of:<br/>`insert`, `update`                                        |
+| **id**              | [UUID](#uuid-type)          | Your UUID for the unit                                                |
+| **groupId**         | [UUID](#uuid-type)          | The foreign UUID of the group the unit belongs to (_groups.csv_ `id`) |
+| **name**            | [string](#string-type)      |
+| **\*propertyOwner** | [string](#string-type)      | Name of the property owner                                            |
 
 #### Example
 
@@ -170,7 +171,7 @@ The `utilisationPeriods.csv` describes utilisation periods.
 | **id**         | [UUID](#uuid-type)          | Your UUID for the utilisation period                                              |
 | **unitId**     | [UUID](#uuid-type)          | The foreign UUID of the unit the utilisation period belongs to (_units.csv_ `id`) |
 | **startDate**  | [Date](#date-type)          |
-| **endDate**    | [Date](#date-type)          |
+| **\*endDate**  | [Date](#date-type)          |
 
 #### Example
 
@@ -193,9 +194,9 @@ The `tenants.csv` file describes registration codes for a tenant.
 | **importType**       | [Import Type](#import-type)        | One of:<br/>`insert`, `update` |
 | **id**               | [UUID](#uuid-type)                 | Your UUID for the tenant       |
 | **registrationCode** | [string](#string-type)             |                                |
-| **email**            | [string](#string-type)             | Optional                       |
-| **phone**            | [Phone Number](#phone-number-type) | Optional                       |
-| **name**             | [string](#string-type)             | Optional                       |
+| **\*email**          | [string](#string-type)             |                                |
+| **\*phone**          | [Phone Number](#phone-number-type) |                                |
+| **\*name**           | [string](#string-type)             |                                |
 
 #### Example
 
@@ -217,7 +218,7 @@ The `tenantCheckIns.csv` file describes the relation between a tenant and a util
 | ----------------------- | --------------------------- | ----------------------------------------------------------------------------------------------------- |
 | **importType**          | [Import Type](#import-type) | One of:<br/>`insert`, `update`                                                                        |
 | **utilisationPeriodId** | [UUID](#uuid-type)          | The foreign UUID of the utilisation period the tenant check-in is for (_utilisationPeriods.csv_ `id`) |
-| **tenantId**            | [UUID](#uuid-type)          | The foreign UUID of the tenant tenant check-in is for (_tenantss.csv_ `id`)                           |
+| **tenantId**            | [UUID](#uuid-type)          | The foreign UUID of the tenant tenant check-in is for (_tenants.csv_ `id`)                            |
 
 #### Example
 
@@ -235,15 +236,15 @@ The `agents.csv` file describes agent-user account data.
 
 #### Fields
 
-| Field                 | Type                               | Description                    |
-| --------------------- | ---------------------------------- | ------------------------------ |
-| **importType**        | [Import Type](#import-type)        | One of:<br/>`insert`, `update` |
-| **id**                | [UUID](#uuid-type)                 | Your UUID for the agent        |
-| **email**             | [string](#string-type)             |                                |
-| **firstName**         | [string](#string-type)             | Optional                       |
-| **lastName**          | [string](#string-type)             |                                |
-| **phone**             | [Phone Number](#phone-number-type) | Optional                       |
-| **serviceProviderId** | [UUID](#uuid-type)                 | Optional                       |
+| Field                   | Type                               | Description                    |
+| ----------------------- | ---------------------------------- | ------------------------------ |
+| **importType**          | [Import Type](#import-type)        | One of:<br/>`insert`, `update` |
+| **id**                  | [UUID](#uuid-type)                 | Your UUID for the agent        |
+| **email**               | [string](#string-type)             |                                |
+| **\*firstName**         | [string](#string-type)             |                                |
+| **lastName**            | [string](#string-type)             |                                |
+| **\*phone**             | [Phone Number](#phone-number-type) |                                |
+| **\*serviceProviderId** | [UUID](#uuid-type)                 |                                |
 
 #### Example
 
@@ -261,13 +262,13 @@ The `propertyTeams.csv` file describes the relation between a property and an ag
 
 #### Fields
 
-| Field             | Type                        | Description                                                                                           |
-| ----------------- | --------------------------- | ----------------------------------------------------------------------------------------------------- |
-| **importType**    | [Import Type](#import-type) | One of:<br/>`insert`, or `delete`                                                                     |
-| **propertyId**    | [UUID](#uuid-type)          | The foreign UUID of the property that the team belongs to (_properties.csv_ `id`)                     |
-| **agentId**       | [UUID](#uuid-type)          | The foreign UUID of the agent that belongs to the team (_agents.csv_ `id`)                            |
-| **validFromDate** | [DateTime](#datetime-type)  | Optional start date of the validity of the relation (if provided **validToDate** is required as well) |
-| **validToDate**   | [DateTime](#datetime-type)  | Optional end date of the validity of the relation (if provided **validFromDate** is required as well) |
+| Field               | Type                        | Description                                                                                  |
+| ------------------- | --------------------------- | -------------------------------------------------------------------------------------------- |
+| **importType**      | [Import Type](#import-type) | One of:<br/>`insert`, or `delete`                                                            |
+| **propertyId**      | [UUID](#uuid-type)          | The foreign UUID of the property that the team belongs to (_properties.csv_ `id`)            |
+| **agentId**         | [UUID](#uuid-type)          | The foreign UUID of the agent that belongs to the team (_agents.csv_ `id`)                   |
+| **\*validFromDate** | [DateTime](#datetime-type)  | Start date of the validity of the relation (if provided **validToDate** is required as well) |
+| **\*validToDate**   | [DateTime](#datetime-type)  | End date of the validity of the relation (if provided **validFromDate** is required as well) |
 
 #### Example
 
@@ -285,15 +286,15 @@ The `userRelations.csv` file describes the relation between an agent and a resou
 
 #### Fields
 
-| Field             | Type                            | Description                                                                                           |
-| ----------------- | ------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| **importType**    | [Import Type](#import-type)     | One of:<br/>`insert`, or `delete`                                                                     |
-| **agentId**       | [UUID](#uuid-type)              | The foreign UUID of the agent that is responsible for the channel path (_agents.csv_ `id`)            |
-| **resourceId**    | [UUID](#uuid-type)              | The foreign UUID of the resource that the agent belongs to ([resource](#resource-type).csv)           |
-| **resourceType**  | [Resource Type](#resource-type) | The type of the resource being referenced by the resourceId (`property`)                              |
-| **validFromDate** | [DateTime](#datetime-type)      | Optional start date of the validity of the relation (if provided **validToDate** is required as well) |
-| **validToDate**   | [DateTime](#datetime-type)      | Optional end date of the validity of the relation (if provided **validFromDate** is required as well) |
-| **jobRole**       | [string](#string-type)          | Optional                                                                                              |
+| Field               | Type                            | Description                                                                                  |
+| ------------------- | ------------------------------- | -------------------------------------------------------------------------------------------- |
+| **importType**      | [Import Type](#import-type)     | One of:<br/>`insert`, or `delete`                                                            |
+| **agentId**         | [UUID](#uuid-type)              | The foreign UUID of the agent that is responsible for the channel path (_agents.csv_ `id`)   |
+| **resourceId**      | [UUID](#uuid-type)              | The foreign UUID of the resource that the agent belongs to ([resource](#resource-type).csv)  |
+| **resourceType**    | [Resource Type](#resource-type) | The type of the resource being referenced by the resourceId (`property`)                     |
+| **\*validFromDate** | [DateTime](#datetime-type)      | Start date of the validity of the relation (if provided **validToDate** is required as well) |
+| **\*validToDate**   | [DateTime](#datetime-type)      | End date of the validity of the relation (if provided **validFromDate** is required as well) |
+| **\*jobRole**       | [string](#string-type)          |                                                                                              |
 
 #### Example
 
@@ -309,15 +310,15 @@ insert,07955b8c-41ac-4a47-9157-3c6fb8450ef4,9b86a4d7-ab95-4b65-a553-24fac1c60627
 
 The `agentPermissions.csv` file describes the agents permissions on a certain resource via predefined agentTypes
 
-| Field             | Type                            | Description                                                                                           |
-| ----------------- | ------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| **importType**    | [Import Type](#import-type)     | One of:<br/>`insert`, or `delete`                                                                     |
-| **resourceType**  | [Resource Type](#resource-type) | The type of the resource being referenced by the resourceId (e.g. `property`)                         |
-| **resourceId**    | [UUID](#uuid-type)              | The foreign UUID of the resource that the agent belongs to [resource](#resource-type).csv `id`        |
-| **agentId**       | [UUID](#uuid-type)              | The foreign UUID of the agent that is responsible for the channel path (_agents.csv_ `id`)            |
-| **agentType**     | [Agent Type](#agent-type)       | Defines the type of an agent                                                                          |
-| **validFromDate** | [DateTime](#datetime-type)      | Optional start date of the validity of the relation (if provided **validToDate** is required as well) |
-| **validToDate**   | [DateTime](#datetime-type)      | Optional end date of the validity of the relation (if provided **validFromDate** is required as well) |
+| Field               | Type                            | Description                                                                                    |
+| ------------------- | ------------------------------- | ---------------------------------------------------------------------------------------------- |
+| **importType**      | [Import Type](#import-type)     | One of:<br/>`insert`, or `delete`                                                              |
+| **resourceType**    | [Resource Type](#resource-type) | The type of the resource being referenced by the resourceId (e.g. `property`)                  |
+| **resourceId**      | [UUID](#uuid-type)              | The foreign UUID of the resource that the agent belongs to [resource](#resource-type).csv `id` |
+| **agentId**         | [UUID](#uuid-type)              | The foreign UUID of the agent that is responsible for the channel path (_agents.csv_ `id`)     |
+| **agentType**       | [Agent Type](#agent-type)       | Defines the type of an agent                                                                   |
+| **\*validFromDate** | [DateTime](#datetime-type)      | Start date of the validity of the relation (if provided **validToDate** is required as well)   |
+| **\*validToDate**   | [DateTime](#datetime-type)      | End date of the validity of the relation (if provided **validFromDate** is required as well)   |
 
 #### Example
 
@@ -341,7 +342,7 @@ The `serviceProviders.csv` file describes a service providers name + address
 | **streetName**  | [string](#string-type)             |                                    |
 | **houseNumber** | [string](#string-type)             |                                    |
 | **zipCode**     | [Postal Code](#postalcode-type)    |                                    |
-| **phone**       | [Phone Number](#phone-number-type) | Optional                           |
+| **\*phone**     | [Phone Number](#phone-number-type) |                                    |
 
 #### Example
 
@@ -390,12 +391,12 @@ insert,ff955c4c-61af-4a47-9157-35cfb8450ef4,property,abc55c4c-67ab-fa47-9157-35c
 The `manifest.json` file controls the Import Jobs execution and behavior.
 The upload/presence of a `manifest.json` file at a Job Import upload location triggers the import process.
 While Customer Support will set up default configuration for each ERP Import Customer, the `manifest.json` file also allows for some customisation of options.
-These options are outlined here:
+These options are all optional and outlined here:
 
 #### Fields
 
 | Field                         | Type                                                                                          | Description                                                                                                                                                       | Default                                                  |
-| ----------------------------- |-----------------------------------------------------------------------------------------------| ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |----------------------------------------------------------|
+| ----------------------------- | --------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------- |
 | **agentPermissions**          | Array of Strings                                                                              | List of permissions to be set for agent imported in the Property Teams file E.g. to set permissions for pinboard and documents ['pinboardAdmin', 'documentAdmin'] | ['tenantManager', 'pinboardAgent', 'serviceCenterAgent'] |
 | **autoImport**                | boolean                                                                                       | Controls whether to automatically import, or to send confirmation email first                                                                                     | true                                                     |
 | **locale**                    | ISO-639 Language Codes and ISO-3166 Country Codes                                             | Default locale. E.g. locale for new agents. `en_US`, `de_DE`                                                                                                      | en_US                                                    |
@@ -411,7 +412,11 @@ These options are outlined here:
   "autoImport": false,
   "locale": "de_DE",
   "receiveAdminNotifications": false,
-  "reportEmails": ["mr.foo@bar.test", "mrs.foo@bar.test", { "test@bar.de": ["error"] }],
+  "reportEmails": [
+    "mr.foo@bar.test",
+    "mrs.foo@bar.test",
+    { "test@bar.de": ["error"] }
+  ],
   "webhooks": [
     {
       "description": "allthings#slackbot-noise",
@@ -452,10 +457,10 @@ The options webhooks needed are outlined here:
 
 ```json
 {
-	"description": "custom-slack-channel",
-	"format": "slack",
-	"triggers": true,
-	"url": "https://hooks.slack.com/services/cdsdfe3"
+  "description": "custom-slack-channel",
+  "format": "slack",
+  "triggers": true,
+  "url": "https://hooks.slack.com/services/cdsdfe3"
 }
 ```
 
@@ -463,10 +468,10 @@ or
 
 ```json
 {
-	"description": "custom-rest-api",
-	"format": "rest",
-	"triggers": ["imported", "failed"],
-	"url": "https://some/rest/endpoint"
+  "description": "custom-rest-api",
+  "format": "rest",
+  "triggers": ["imported", "failed"],
+  "url": "https://some/rest/endpoint"
 }
 ```
 
@@ -490,13 +495,13 @@ The payload that is sent to the rest api includes following fields:
 
 ```json
 {
-	"customerId": "foo-bar",
-	"jobCreateDate": 1554465632000,
-	"jobId": "sfd7we",
-	"jobStatus": "finished",
-	"jobUpdateDate": 1554465813000,
-	"status": ["properties.csv"],
-	"totalJobRows": 23
+  "customerId": "foo-bar",
+  "jobCreateDate": 1554465632000,
+  "jobId": "sfd7we",
+  "jobStatus": "finished",
+  "jobUpdateDate": 1554465813000,
+  "status": ["properties.csv"],
+  "totalJobRows": 23
 }
 ```
 
