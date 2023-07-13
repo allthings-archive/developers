@@ -55,7 +55,7 @@ A POST request to the token endpoint with the following form data will return a 
 | ------------- | -------------------------------------------------------------- |
 | client_id     | Will be provided by Allthings, `xxxxxx` in the example below   |
 | client_secret | Will be provided by Allthings, `yyyyyy` in the example below   |
-| response_type | `client_credentials`                                           |
+| grant_type    | `client_credentials`                                           |
 | scope         | Specifies the scope of the access (for example `user:profile`) |
 
 Request:
