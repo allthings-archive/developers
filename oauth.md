@@ -49,7 +49,7 @@ long term API access. Invalid or expired access tokens can be refreshed.
 
 ### 1. Get a Token
 
-A POST request to the token endpoint with the following form data will return a json response with the token. Make sure to use `application/x-www-form-urlencoded` as `Content-Type` HTTP header and encode your form data accordingly.
+A POST request to the token endpoint with the following form data will return a json response with the token. Make sure to use `application/x-www-form-urlencoded` as `Content-Type` HTTP header, urlencode your form data and pass it in the body of the request (not as part of the query string).
 
 | Key           | Value                                                          |
 | ------------- | -------------------------------------------------------------- |
@@ -61,14 +61,14 @@ A POST request to the token endpoint with the following form data will return a 
 Request:
 
 ```
-> POST /oauth/token HTTP/2
-> Host: accounts.allthings.me
-> user-agent: insomnia/2021.6.0
-> content-type: application/x-www-form-urlencoded
-> accept: */*
-> content-length: 88
+POST /oauth/token HTTP/2
+Host: accounts.allthings.me
+user-agent: insomnia/2021.6.0
+content-type: application/x-www-form-urlencoded
+accept: */*
+content-length: 88
 
-| client_id=xxxxxx&client_secret=yyyyyy&grant_type=client_credentials&scope=user%3Aprofile
+client_id=xxxxxx&client_secret=yyyyyy&grant_type=client_credentials&scope=user%3Aprofile
 ```
 
 Response:
